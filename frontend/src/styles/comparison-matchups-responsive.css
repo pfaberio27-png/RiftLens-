@@ -1,0 +1,747 @@
+/* COMPARACIÓN CAMPEÓN VS REFERENCIA */
+
+.comparison-section {
+  min-height: 620px;
+}
+
+.compare-wrap {
+  display: grid;
+
+  grid-template-columns:
+    400px
+    minmax(0, 1fr);
+
+  gap: 56px;
+
+  align-items: start;
+}
+
+/* TARJETA CAMPEÓN */
+
+.compare-champ {
+  overflow: hidden;
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  border-radius: 4px;
+}
+
+.compare-champ-image {
+  width: 100%;
+  height: 235px;
+
+  overflow: hidden;
+
+  background: var(--panel-raised);
+}
+
+.compare-champ-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center 22%;
+}
+
+.compare-champ-body {
+  padding: 22px 24px 25px;
+}
+
+.compare-role {
+  color: var(--cyan);
+
+  font-size: 12px;
+}
+
+.compare-champ-body h3 {
+  margin-top: 5px;
+
+  color: var(--gold-bright);
+
+  font-family: "Cinzel", serif;
+
+  font-size: 25px;
+
+  font-weight: 600;
+}
+
+.compare-champ-body p {
+  margin-top: 14px;
+
+  color: var(--text-blue);
+
+  font-size: 12.5px;
+}
+
+/* ============================================================
+   ¿QUÉ TAN CERCA ESTÁS DEL NIVEL PRO?
+============================================================ */
+
+.comparacion-bloque {
+  margin-top: 36px;
+}
+
+.comparacion-bloque-titulo {
+  margin-bottom: 16px;
+
+  color: var(--gold);
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.comparacion-bloque-titulo span {
+  color: var(--text-blue);
+
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Rejilla de barras: se adapta sola y nunca se desborda */
+.comparacion-barras {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(100%, 270px), 1fr)
+    );
+
+  gap: 16px;
+}
+
+.comparacion-barra,
+.promedio-card {
+  min-width: 0;
+
+  padding: 16px 18px 18px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.comparacion-barra-head {
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.comparacion-barra-nombre {
+  min-width: 0;
+
+  color: var(--text-blue);
+
+  font-size: 13px;
+
+  overflow-wrap: anywhere;
+}
+
+.comparacion-pocas {
+  color: var(--text-dim);
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.comparacion-barra-valores {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+.comparacion-barra-valores > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.comparacion-barra-diferencia {
+  align-items: flex-end;
+
+  text-align: right;
+}
+
+.comparacion-barra-etiqueta {
+  color: var(--text-dim);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.comparacion-barra-valores strong {
+  font-size: 15px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.comparacion-valor {
+  color: var(--cyan);
+}
+
+.comparacion-referencia {
+  color: var(--gold);
+}
+
+/* Dato no disponible: gris y sin color de estado */
+.sin-dato {
+  color: var(--text-dim) !important;
+
+  font-weight: 500;
+}
+
+/* Pista de la barra: relleno = tu valor, marcador = referencia */
+.comparacion-pista {
+  position: relative;
+
+  height: 8px;
+
+  margin-top: 14px;
+
+  border-radius: 4px;
+
+  background: var(--panel-raised);
+
+  box-shadow: inset 0 0 0 1px rgba(var(--gold-rgb), 0.1);
+}
+
+/* Línea central cuando hay valores negativos */
+.comparacion-pista.divergente::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background: rgba(var(--gold-bright-rgb), 0.25);
+}
+
+.comparacion-relleno {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  border-radius: 4px;
+
+  background: var(--gold);
+
+  transition:
+    width 0.5s ease,
+    left 0.5s ease;
+}
+
+.comparacion-relleno.superior {
+  background: var(--victory);
+}
+
+.comparacion-relleno.inferior {
+  background: var(--defeat);
+}
+
+.comparacion-relleno.sin-estado {
+  background: rgba(var(--gold-rgb), 0.25);
+}
+
+.comparacion-marcador {
+  position: absolute;
+
+  top: -4px;
+
+  width: 2px;
+  height: 16px;
+
+  margin-left: -1px;
+
+  border-radius: 1px;
+
+  background: var(--gold-bright);
+}
+
+/* Botón "?" con tooltip (hover, foco o toque) */
+.metrica-ayuda {
+  width: 18px;
+  height: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 1px solid var(--line);
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--text-dim);
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: help;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.metrica-ayuda:hover,
+.metrica-ayuda.activa {
+  border-color: var(--hextech);
+
+  color: var(--hextech);
+}
+
+.metrica-ayuda:focus-visible {
+  outline: 1px solid var(--hextech);
+  outline-offset: 2px;
+}
+
+/* Anclado al encabezado de la tarjeta: ocupa su ancho y no
+   se sale de la pantalla en celular */
+.metrica-ayuda-tooltip {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px);
+
+  z-index: 5;
+
+  padding: 8px 11px;
+
+  border: 1px solid var(--line);
+  border-radius: 3px;
+
+  background: var(--panel);
+
+  box-shadow: 0 6px 18px rgba(var(--void-rgb), 0.6);
+
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transform: translateY(4px);
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.metrica-ayuda:hover .metrica-ayuda-tooltip,
+.metrica-ayuda:focus-visible .metrica-ayuda-tooltip,
+.metrica-ayuda.activa .metrica-ayuda-tooltip {
+  opacity: 1;
+
+  transform: none;
+}
+
+/* Perfil del campeón insignia */
+.compare-champ-nombre {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.compare-champ-icono {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+}
+
+.compare-champ-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+.compare-champ-stats dt {
+  color: var(--text-dim);
+
+  font-size: 11px;
+}
+
+.compare-champ-stats dd {
+  color: var(--gold-bright);
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.comparacion-insignia {
+  min-width: 0;
+}
+
+/* Pestañas "Vs nivel pro" / "Vs tu promedio" */
+.comparacion-tabs {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 16px;
+}
+
+.comparacion-tabs button {
+  padding: 8px 16px;
+
+  border: 1px solid rgba(var(--gold-rgb), 0.22);
+  border-radius: 4px;
+
+  background: rgba(var(--panel-rgb), 0.7);
+
+  color: var(--text-dim);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.comparacion-tabs button:hover {
+  border-color: rgba(var(--gold-rgb), 0.55);
+
+  color: var(--gold-bright);
+}
+
+.comparacion-tabs button.activo {
+  border-color: var(--gold);
+
+  background: rgba(var(--gold-rgb), 0.1);
+
+  color: var(--gold-bright);
+}
+
+.comparacion-tabs button:focus-visible {
+  outline: 2px solid var(--hextech);
+  outline-offset: 2px;
+}
+
+.comparacion-nota {
+  margin-top: 12px;
+
+  color: var(--text-dim);
+
+  font-size: 12px;
+}
+
+/* Tus promedios generales: tarjetas pequeñas sin barras */
+.promedios-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(100%, 180px), 1fr)
+    );
+
+  gap: 14px;
+}
+
+.promedio-card {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.promedio-valor {
+  color: var(--cyan);
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: 650px) {
+
+  .comparacion-tabs button {
+    flex: 1 1 0;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .comparacion-barra-valores {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .comparacion-barra-diferencia {
+    grid-column: 1 / -1;
+
+    align-items: flex-start;
+
+    text-align: left;
+  }
+
+}
+
+/* RANGO DEL JUGADOR (PlayerHero) */
+
+.rank-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 8px;
+}
+
+.rank-details {
+  padding-left: 4px;
+
+  color: var(--text-dim);
+
+  font-size: 13px;
+
+  letter-spacing: 0.5px;
+}
+
+.rank-wins {
+  color: var(--victory);
+}
+
+.rank-losses {
+  color: var(--defeat);
+}
+
+/* RESPONSIVE COMPARACIÓN */
+
+@media (max-width: 1200px) {
+
+  .compare-wrap {
+    grid-template-columns:
+      320px
+      minmax(0, 1fr);
+
+    gap: 32px;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .compare-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-champ {
+    max-width: 430px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .compare-champ {
+    max-width: none;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .header {
+    min-height: auto;
+
+    padding: 16px 22px;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+  }
+
+  .header-search {
+    width: 100%;
+  }
+
+  .player-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .player-hero-left {
+    padding: 45px 24px;
+  }
+
+  .player-hero-right {
+    min-height: 360px;
+
+    clip-path: none;
+  }
+
+  .section,
+  .recent-section {
+    padding: 48px 24px;
+  }
+
+  .section-head {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .section-head p {
+    max-width: none;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .header-search {
+    flex-direction: column;
+
+    padding: 10px;
+  }
+
+  .header-search input {
+    width: 100%;
+
+    padding: 10px;
+  }
+
+  .header-search button {
+    width: 100%;
+  }
+
+  .hero {
+    padding: 50px 22px;
+  }
+
+  .hero-search {
+    flex-direction: column;
+  }
+
+  .hero-search button {
+    min-height: 48px;
+  }
+
+  .player-title {
+    font-size: 35px;
+  }
+
+  .player-title span {
+    display: block;
+
+    margin-left: 0;
+    margin-top: 5px;
+
+    font-size: 20px;
+  }
+
+  .hero-stats {
+    gap: 28px;
+
+    flex-wrap: wrap;
+  }
+
+  .hero-stat strong {
+    font-size: 30px;
+  }
+
+  .player-hero-right {
+    min-height: 300px;
+  }
+
+  .champion-caption {
+    left: 26px;
+    bottom: 28px;
+  }
+
+  .section-head h2 {
+    font-size: 24px;
+  }
+
+  .match-card {
+    min-width: 165px;
+  }
+
+  .analisis-footer {
+    padding: 28px 24px;
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .form-strip {
+    flex-wrap: wrap;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .header-search {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .header-search input {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .region-select-wrapper {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header-search button {
+    flex: 1;
+  }
+}

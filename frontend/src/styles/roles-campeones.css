@@ -1,0 +1,612 @@
+/* ============================================================
+   ROLES Y CAMPEONES (RolesChampions)
+============================================================ */
+
+/* TARJETAS DE ROL */
+
+.rc-roles {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.rc-rol {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  padding: 16px;
+
+  border: 1px solid var(--line);
+  border-radius: 4px;
+
+  background: var(--panel);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease,
+    background-color 0.2s ease;
+}
+
+.rc-rol:not(:disabled):hover {
+  border-color: rgba(var(--hextech-rgb), 0.45);
+
+  box-shadow: 0 0 16px rgba(var(--hextech-rgb), 0.14);
+}
+
+.rc-rol:focus-visible,
+.rc-campeon:focus-visible,
+.rc-partida:focus-visible {
+  outline: 2px solid var(--hextech);
+  outline-offset: 2px;
+}
+
+.rc-rol.seleccionado {
+  border-color: var(--gold);
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(var(--gold-rgb), 0.12),
+      rgba(var(--panel-rgb), 1) 70%
+    );
+
+  box-shadow: 0 0 0 1px rgba(var(--gold-rgb), 0.35);
+}
+
+/* Rol sin partidas: atenuado y no seleccionable */
+.rc-rol.sin-partidas {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+.rc-rol-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 6px;
+}
+
+.rc-rol-head strong {
+  color: var(--gold-bright);
+
+  font-family: "Cinzel", serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.rc-etiqueta {
+  padding: 2px 7px;
+
+  border: 1px solid var(--gold-dim);
+  border-radius: 3px;
+
+  background: rgba(var(--gold-rgb), 0.12);
+
+  color: var(--gold);
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.rc-rol-uso {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  color: var(--text-blue);
+
+  font-size: 12.5px;
+}
+
+.rc-barra {
+  position: relative;
+
+  display: block;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 3px;
+
+  background: var(--panel-raised);
+
+  box-shadow: inset 0 0 0 1px rgba(var(--gold-rgb), 0.1);
+}
+
+.rc-barra-relleno {
+  display: block;
+
+  height: 100%;
+
+  border-radius: 3px;
+
+  background: var(--hextech);
+
+  transition: width 0.5s ease;
+}
+
+.rc-rol.seleccionado .rc-barra-relleno {
+  background: var(--gold);
+}
+
+.rc-rol-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px 10px;
+
+  margin-top: 2px;
+}
+
+.rc-rol-stats > span,
+.rc-campeon-dato {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+.rc-rol-stats small,
+.rc-campeon-dato small {
+  color: var(--text-dim);
+
+  font-size: 10.5px;
+}
+
+.rc-rol-stats b,
+.rc-campeon-dato b {
+  color: var(--gold-bright);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.rc-rol-vacio {
+  color: var(--text-dim);
+
+  font-size: 12px;
+}
+
+.rc-wr-alto {
+  color: var(--victory) !important;
+}
+
+.rc-wr-bajo {
+  color: var(--defeat) !important;
+}
+
+.rc-sin-dato {
+  color: var(--text-dim) !important;
+}
+
+/* LISTA DE CAMPEONES */
+
+.rc-campeones-bloque {
+  margin-top: 30px;
+}
+
+.rc-bloque-titulo {
+  margin-bottom: 14px;
+
+  color: var(--gold);
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.rc-campeones {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  list-style: none;
+}
+
+.rc-campeon {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    minmax(0, 300px)
+    18px;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 10px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: 4px;
+
+  background: var(--panel);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.rc-campeon:hover {
+  border-color: rgba(var(--hextech-rgb), 0.45);
+}
+
+.rc-campeon.abierto {
+  border-color: var(--gold);
+
+  background: rgba(var(--gold-rgb), 0.08);
+}
+
+.rc-campeon-icono {
+  width: 42px;
+  height: 42px;
+
+  display: block;
+
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+
+  background: var(--panel-raised);
+}
+
+.rc-campeon-nombre {
+  min-width: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--gold-bright);
+
+  font-size: 15px;
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+.rc-campeon-datos {
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.rc-campeon-flecha {
+  color: var(--text-dim);
+
+  transition: transform 0.2s ease;
+}
+
+.rc-campeon.abierto .rc-campeon-flecha {
+  color: var(--gold);
+
+  transform: rotate(180deg);
+}
+
+/* PANEL DEL CAMPEÓN */
+
+.rc-panel {
+  margin-top: 14px;
+
+  padding: 20px;
+
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(var(--panel-rgb), 1),
+      rgba(var(--void-rgb), 0.95)
+    );
+
+  animation: rcPanelEntrada 0.28s ease;
+}
+
+@keyframes rcPanelEntrada {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: none;
+  }
+
+}
+
+.rc-panel-head {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.rc-panel-icono {
+  width: 56px;
+  height: 56px;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.rc-panel-head h3 {
+  color: var(--gold-bright);
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.rc-panel-head p {
+  color: var(--text-blue);
+
+  font-size: 13px;
+}
+
+.rc-panel-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(100%, 150px), 1fr)
+    );
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.rc-panel-stats > div {
+  min-width: 0;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(var(--gold-rgb), 0.14);
+  border-radius: 4px;
+
+  background: rgba(var(--panel-rgb), 0.7);
+}
+
+.rc-panel-stats dt {
+  color: var(--text-dim);
+
+  font-size: 11px;
+}
+
+.rc-panel-stats dd {
+  color: var(--gold-bright);
+
+  font-size: 17px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.rc-subtitulo {
+  margin: 20px 0 10px;
+
+  color: var(--gold);
+
+  font-family: "Cinzel", serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rc-destacadas,
+.rc-ultimas {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(100%, 160px), 1fr)
+    );
+
+  gap: 10px;
+}
+
+.rc-destacadas {
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(100%, 220px), 1fr)
+    );
+}
+
+/* Tarjeta de partida: abre la ventana de detalle */
+.rc-partida {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 11px 13px;
+
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 4px;
+
+  background: var(--panel);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.rc-partida.victoria {
+  border-left-color: var(--victory);
+}
+
+.rc-partida.derrota {
+  border-left-color: var(--defeat);
+}
+
+.rc-partida:not(:disabled):hover {
+  box-shadow: 0 0 14px rgba(var(--hextech-rgb), 0.16);
+}
+
+.rc-partida-titulo {
+  color: var(--gold);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.rc-partida-resultado {
+  color: var(--text-blue);
+
+  font-size: 12px;
+}
+
+.rc-partida.victoria .rc-partida-resultado {
+  color: var(--victory);
+}
+
+.rc-partida.derrota .rc-partida-resultado {
+  color: var(--defeat);
+}
+
+.rc-partida-kda {
+  color: var(--gold-bright);
+
+  font-size: 16px;
+}
+
+.rc-muertes {
+  color: var(--defeat);
+}
+
+.rc-partida-meta {
+  color: var(--text-dim);
+
+  font-size: 11.5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+  .rc-roles {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+/* Celular: tarjetas de rol en 2 columnas */
+@media (max-width: 700px) {
+
+  .rc-roles {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .rc-rol {
+    padding: 13px;
+  }
+
+  /* Fila de campeón en 2 líneas: icono + nombre arriba,
+     partidas, win rate y KDA abajo */
+  .rc-campeon {
+    grid-template-columns:
+      42px
+      minmax(0, 1fr)
+      18px;
+
+    gap: 8px 12px;
+  }
+
+  .rc-campeon-icono {
+    grid-row: span 2;
+  }
+
+  .rc-campeon-nombre {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .rc-campeon-flecha {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .rc-campeon-datos {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+
+  .rc-panel {
+    padding: 16px;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  .rc-roles {
+    grid-template-columns: 1fr;
+  }
+
+}

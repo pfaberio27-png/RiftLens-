@@ -1,0 +1,72 @@
+{
+  "fuente": "Oracle's Elixir",
+  "dataset": "2026_LoL_esports_match_data_from_OraclesElixir.csv",
+  "temporada": 2026,
+  "tipo_referencia": "Competiciones profesionales de máximo nivel incluidas en el dataset",
+  "ligas": [
+    "LCK",
+    "LPL",
+    "LEC",
+    "LCP",
+    "LCS",
+    "CBLOL",
+    "MSI",
+    "EWC"
+  ],
+  "roles": {
+    "TOP": {
+      "partidas": 4774,
+      "win_rate": 50.0,
+      "kda": 4.08,
+      "cs_por_minuto": 8.52,
+      "oro_por_minuto": 389.56,
+      "daño_por_minuto": 611.21,
+      "vision_score": 43.89
+    },
+    "JUNGLE": {
+      "partidas": 4774,
+      "win_rate": 50.0,
+      "kda": 5.48,
+      "cs_por_minuto": 7.02,
+      "oro_por_minuto": 393.34,
+      "daño_por_minuto": 457.56,
+      "vision_score": 59.36
+    },
+    "MID": {
+      "partidas": 4774,
+      "win_rate": 50.0,
+      "kda": 5.41,
+      "cs_por_minuto": 9.0,
+      "oro_por_minuto": 408.22,
+      "daño_por_minuto": 667.0,
+      "vision_score": 43.76
+    },
+    "ADC": {
+      "partidas": 4774,
+      "win_rate": 50.0,
+      "kda": 5.55,
+      "cs_por_minuto": 9.91,
+      "oro_por_minuto": 485.43,
+      "daño_por_minuto": 767.71,
+      "vision_score": 43.61
+    },
+    "SUPPORT": {
+      "partidas": 4774,
+      "win_rate": 50.0,
+      "kda": 5.61,
+      "cs_por_minuto": 1.08,
+      "oro_por_minuto": 265.54,
+      "daño_por_minuto": 217.44,
+      "vision_score": 139.13
+    }
+  },
+  "metodologia": {
+    "unidad": "Promedio por partida de jugador",
+    "win_rate": "Porcentaje de victorias",
+    "kda": "(kills + assists) / deaths; cuando deaths = 0 se utiliza 1 para evitar división por cero",
+    "oro_por_minuto": "totalgold / duración de partida en minutos",
+    "cs_por_minuto": "cspm proporcionado por Oracle's Elixir",
+    "daño_por_minuto": "dpm proporcionado por Oracle's Elixir",
+    "vision_score": "visionscore proporcionado por Oracle's Elixir"
+  }
+}

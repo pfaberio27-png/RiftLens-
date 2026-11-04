@@ -1,0 +1,312 @@
+/* RIFTLENS TOAST */
+
+.rift-toast {
+  position: fixed;
+
+  top: 104px;
+  right: 28px;
+
+  z-index: 9999;
+
+  width: min(
+    420px,
+    calc(100vw - 40px)
+  );
+
+  display: grid;
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    28px;
+
+  align-items: start;
+  gap: 12px;
+
+  padding: 17px 16px 19px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--panel-rgb), 0.98),
+      rgba(var(--void-rgb), 0.98)
+    );
+
+  border: 1px solid
+    rgba(var(--gold-rgb), 0.28);
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 18px 50px
+      rgba(0, 0, 0, 0.55),
+    0 0 0 1px
+      rgba(255, 255, 255, 0.02);
+
+  overflow: hidden;
+
+  animation:
+    riftToastEntrada
+    0.35s
+    ease-out;
+}
+
+/* ICONO */
+
+.rift-toast-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-family:
+    "IBM Plex Sans",
+    sans-serif;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* CONTENIDO */
+
+.rift-toast-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.rift-toast-content strong {
+  font-family:
+    "IBM Plex Sans",
+    sans-serif;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--gold-bright);
+}
+
+.rift-toast-content span {
+  font-size: 13px;
+  line-height: 1.5;
+
+  color: var(--text-blue);
+
+  overflow-wrap: anywhere;
+}
+
+/* CERRAR */
+
+.rift-toast-close {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text-dim);
+
+  font-size: 21px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.rift-toast-close:hover {
+  color: var(--gold-bright);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+/* SUCCESS */
+
+.rift-toast.success {
+  border-left:
+    3px solid
+    var(--victory);
+}
+
+.rift-toast.success
+.rift-toast-icon {
+  color: var(--victory);
+
+  border:
+    1px solid
+    rgba(var(--victory-rgb), 0.5);
+
+  background:
+    rgba(var(--victory-rgb), 0.12);
+}
+
+/* ERROR */
+
+.rift-toast.error {
+  border-left:
+    3px solid
+    var(--defeat);
+}
+
+.rift-toast.error
+.rift-toast-icon {
+  color: var(--defeat);
+
+  border:
+    1px solid
+    rgba(var(--defeat-rgb), 0.5);
+
+  background:
+    rgba(var(--defeat-rgb), 0.12);
+}
+
+/* BARRA DE TIEMPO */
+
+.rift-toast-progress {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  height: 2px;
+  width: 100%;
+
+  transform-origin: left;
+
+  animation:
+    riftToastTiempo
+    5s
+    linear
+    forwards;
+}
+
+.rift-toast.success
+.rift-toast-progress {
+  background:
+    var(--victory);
+}
+
+.rift-toast.error
+.rift-toast-progress {
+  background:
+    var(--defeat);
+}
+
+/* ANIMACIONES */
+
+@keyframes riftToastEntrada {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+@keyframes riftToastTiempo {
+
+  from {
+    transform:
+      scaleX(1);
+  }
+
+  to {
+    transform:
+      scaleX(0);
+  }
+
+}
+
+/* RESPONSIVE */
+
+@media (
+  max-width: 640px
+) {
+
+  .rift-toast {
+    top: 82px;
+
+    left: 16px;
+    right: 16px;
+
+    width: auto;
+
+    grid-template-columns:
+      36px
+      minmax(0, 1fr)
+      26px;
+
+    padding:
+      14px
+      13px
+      17px;
+  }
+
+  .rift-toast-icon {
+    width: 34px;
+    height: 34px;
+
+    font-size: 17px;
+  }
+
+}
+/* MATCH CARD CLICK */
+
+.match-card.clickable {
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.match-card.clickable:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(var(--gold-rgb), 0.55);
+
+  box-shadow:
+    0 12px 26px
+    rgba(0, 0, 0, 0.28);
+}
+
+.match-card.clickable:focus-visible {
+  outline:
+    2px solid
+    var(--gold);
+
+  outline-offset:
+    3px;
+}

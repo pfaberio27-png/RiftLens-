@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+/* VARIABLES */
+
+:root {
+  /* Fondos (azul marino Hextech) */
+  --void: #010a13;
+  --panel: #091428;
+  --panel-raised: #0a1428;
+  --navy-line: #1e2328;
+
+  /* Dorados */
+  --gold: #c8aa6e;
+  --gold-bright: #f0e6d2;
+  --gold-dim: #785a28;
+
+  /* Cian Hextech (--cyan se mantiene como alias) */
+  --hextech: #0ac8b9;
+  --hextech-dim: #0397ab;
+  --cyan: var(--hextech);
+
+  /* Resultado de partida */
+  --victory: #2dbe6c;
+  --defeat: #e84057;
+
+  /* Textos */
+  --text: #f0e6d2;
+  --text-blue: #9eb6d9;
+  --text-dim: #8e9bae;
+
+  /* Componentes RGB para transparencias: rgba(var(--gold-rgb), 0.1) */
+  --void-rgb: 1, 10, 19;
+  --panel-rgb: 9, 20, 40;
+  --gold-rgb: 200, 170, 110;
+  --gold-bright-rgb: 240, 230, 210;
+  --gold-dim-rgb: 120, 90, 40;
+  --hextech-rgb: 10, 200, 185;
+  --victory-rgb: 45, 190, 108;
+  --defeat-rgb: 232, 64, 87;
+
+  /* Bordes */
+  --line: rgba(var(--gold-rgb), 0.25);
+
+  /* Estilos de juego (K-Means): hasta 6 grupos distinguibles.
+     Se evitan verde y rojo para no confundirlos con victoria/derrota. */
+  --grupo-1: var(--gold);
+  --grupo-2: var(--hextech);
+  --grupo-3: #a78bfa;
+  --grupo-4: #f0965a;
+  --grupo-5: #5b9cf0;
+  --grupo-6: #e87bbf;
+}
+
+/* RESET */
+
+html {
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--void);
+  color: var(--gold-bright);
+
+  font-family: "IBM Plex Sans", sans-serif;
+  line-height: 1.5;
+
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.01em;
+}
+
+.app {
+  min-height: 100vh;
+  background: var(--void);
+}

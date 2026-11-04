@@ -1,0 +1,951 @@
+/* ============================================================
+   VENTANA DE DETALLE DE PARTIDA (MatchDetailModal)
+   Se renderiza con createPortal en document.body.
+   ============================================================ */
+
+.match-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px;
+
+  background: rgba(var(--void-rgb), 0.82);
+  backdrop-filter: blur(7px);
+
+  animation: matchModalBackdropIn 0.2s ease-out;
+}
+
+.match-modal {
+  width: min(1280px, 100%);
+  max-height: calc(100vh - 56px);
+  max-height: calc(100dvh - 56px);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+
+  background: linear-gradient(
+    145deg,
+    rgba(var(--panel-rgb), 0.99),
+    rgba(var(--void-rgb), 0.99)
+  );
+
+  border: 1px solid rgba(var(--gold-rgb), 0.26);
+  border-radius: 10px;
+
+  box-shadow: 0 28px 80px rgba(var(--void-rgb), 0.75);
+
+  animation: matchModalIn 0.25s ease-out;
+}
+
+
+/* ------------------------------------------------------------
+   a) CABECERA
+------------------------------------------------------------ */
+
+.match-modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 20px 26px;
+
+  background: rgba(var(--void-rgb), 0.97);
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.match-modal-header h2 {
+  margin: 6px 0 4px;
+
+  font-family: "Cinzel", serif;
+  font-size: clamp(20px, 2vw, 28px);
+
+  color: var(--gold-bright);
+}
+
+.match-modal-header p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: var(--text-dim);
+}
+
+.match-modal-result {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 24px;
+  padding: 4px 9px;
+
+  border-radius: 4px;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.match-modal-result.win {
+  color: var(--victory);
+  background: rgba(var(--victory-rgb), 0.12);
+  border: 1px solid rgba(var(--victory-rgb), 0.32);
+}
+
+.match-modal-result.loss {
+  color: var(--defeat);
+  background: rgba(var(--defeat-rgb), 0.12);
+  border: 1px solid rgba(var(--defeat-rgb), 0.32);
+}
+
+.match-modal-close {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(var(--gold-rgb), 0.2);
+  border-radius: 5px;
+
+  background: rgba(var(--gold-rgb), 0.03);
+  color: var(--gold-bright);
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.match-modal-close:hover {
+  background: rgba(var(--gold-rgb), 0.08);
+  border-color: rgba(var(--gold-rgb), 0.55);
+}
+
+.match-modal-close:focus-visible,
+.match-modal-retry:focus-visible {
+  outline: 2px solid var(--hextech);
+  outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   CUERPO
+------------------------------------------------------------ */
+
+.match-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 22px 26px 28px;
+}
+
+.match-modal-body h3 {
+  margin: 0 0 12px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--gold);
+}
+
+
+/* ------------------------------------------------------------
+   b) MARCADOR POR EQUIPO
+------------------------------------------------------------ */
+
+.match-modal-marcador {
+  padding: 18px 20px;
+
+  background: rgba(var(--gold-rgb), 0.025);
+  border: 1px solid rgba(var(--gold-rgb), 0.1);
+  border-radius: 7px;
+}
+
+.match-modal-score {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.match-modal-score > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-modal-score > div > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: var(--text-dim);
+}
+
+.match-modal-score strong {
+  font-family: "Cinzel", serif;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.match-modal-score .aliado strong {
+  color: var(--hextech);
+}
+
+.match-modal-score .rival strong {
+  color: var(--defeat);
+}
+
+.match-modal-vs {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: rotate(45deg);
+
+  border: 1px solid rgba(var(--gold-rgb), 0.35);
+
+  color: var(--gold);
+}
+
+.match-modal-vs b {
+  transform: rotate(-45deg);
+
+  font-size: 11px;
+}
+
+.match-modal-objetivos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  max-width: 520px;
+  margin: 16px auto 0;
+}
+
+.match-modal-objetivos > div {
+  display: grid;
+  grid-template-columns: 1fr minmax(90px, auto) 1fr;
+  align-items: center;
+  gap: 12px;
+
+  padding: 6px 10px;
+
+  border-radius: 4px;
+}
+
+.match-modal-objetivos > div:nth-child(odd) {
+  background: rgba(var(--gold-rgb), 0.03);
+}
+
+.match-modal-objetivos .aliado,
+.match-modal-objetivos .rival {
+  font-size: 15px;
+  font-weight: 700;
+
+  color: var(--gold-bright);
+}
+
+.match-modal-objetivos .aliado {
+  text-align: right;
+}
+
+.match-modal-objetivos .rival {
+  text-align: left;
+}
+
+.match-modal-objetivos .etiqueta {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--text-dim);
+}
+
+.match-modal-aviso {
+  margin: 14px 0 0;
+
+  font-size: 12px;
+  text-align: center;
+
+  color: var(--text-dim);
+}
+
+
+/* ------------------------------------------------------------
+   c) DUELO DE LÍNEA
+------------------------------------------------------------ */
+
+.match-modal-duelo {
+  padding: 18px 20px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(var(--hextech-rgb), 0.05),
+    rgba(var(--defeat-rgb), 0.05)
+  );
+
+  border: 1px solid rgba(var(--gold-rgb), 0.14);
+  border-radius: 7px;
+}
+
+.duelo-campeones {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+.duelo-campeon {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.duelo-campeon.rival {
+  flex-direction: row-reverse;
+
+  text-align: right;
+}
+
+.duelo-campeon > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.duelo-campeon strong {
+  font-size: 15px;
+
+  color: var(--gold-bright);
+}
+
+.duelo-campeon span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  color: var(--text-dim);
+}
+
+.duelo-icono {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+
+  object-fit: cover;
+
+  border-radius: 6px;
+  border: 1px solid rgba(var(--gold-rgb), 0.35);
+  background: var(--panel-raised);
+}
+
+.duelo-campeon:not(.rival) .duelo-icono {
+  border-color: rgba(var(--hextech-rgb), 0.55);
+}
+
+.duelo-campeon.rival .duelo-icono {
+  border-color: rgba(var(--defeat-rgb), 0.5);
+}
+
+.duelo-vs {
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--gold);
+}
+
+.duelo-filas {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.duelo-filas > div {
+  display: grid;
+  grid-template-columns: 1fr minmax(110px, auto) 1fr;
+  align-items: center;
+  gap: 12px;
+
+  padding: 7px 10px;
+
+  border-radius: 4px;
+}
+
+.duelo-filas > div:nth-child(odd) {
+  background: rgba(var(--void-rgb), 0.35);
+}
+
+.duelo-filas .propio,
+.duelo-filas .rival {
+  font-size: 14px;
+  font-weight: 700;
+
+  color: var(--text);
+}
+
+.duelo-filas .propio {
+  text-align: left;
+}
+
+.duelo-filas .rival {
+  text-align: right;
+}
+
+.duelo-filas .etiqueta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--text-dim);
+}
+
+.duelo-diferencia {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.duelo-diferencia.positiva {
+  color: var(--victory);
+}
+
+.duelo-diferencia.negativa {
+  color: var(--defeat);
+}
+
+.duelo-diferencia.neutra {
+  color: var(--text-dim);
+}
+
+
+/* ------------------------------------------------------------
+   d) LOS 10 JUGADORES
+------------------------------------------------------------ */
+
+.match-modal-teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.match-modal-team {
+  min-width: 0;
+
+  background: rgba(var(--gold-rgb), 0.015);
+  border: 1px solid rgba(var(--hextech-rgb), 0.2);
+  border-radius: 7px;
+
+  overflow: hidden;
+}
+
+.match-modal-team.enemy {
+  border-color: rgba(var(--defeat-rgb), 0.2);
+}
+
+.match-modal-body .match-modal-team-title {
+  margin: 0;
+  padding: 11px 14px;
+
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.1);
+  background: rgba(var(--gold-rgb), 0.03);
+
+  color: var(--hextech);
+}
+
+.match-modal-body .match-modal-team.enemy .match-modal-team-title {
+  color: var(--defeat);
+}
+
+.match-modal-player-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* Fila: ícono | nombre | KDA
+         ícono | stats  | ítems */
+.modal-player-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icono nombre kda"
+    "icono stats  items";
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 8px;
+
+  padding: 11px 14px;
+
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.07);
+
+  transition: background 0.2s ease;
+}
+
+.modal-player-row:last-child {
+  border-bottom: 0;
+}
+
+.modal-player-row:hover {
+  background: rgba(var(--gold-rgb), 0.03);
+}
+
+.modal-player-row.highlighted {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-rgb), 0.12),
+    rgba(var(--gold-rgb), 0.02)
+  );
+
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.modal-champion-icon {
+  grid-area: icono;
+
+  width: 44px;
+  height: 44px;
+
+  object-fit: cover;
+
+  border-radius: 5px;
+  border: 1px solid rgba(var(--gold-rgb), 0.32);
+  background: var(--panel-raised);
+}
+
+.modal-champion-icon.vacio,
+.duelo-icono.vacio {
+  display: block;
+}
+
+.modal-player-name {
+  grid-area: nombre;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.modal-player-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 13px;
+
+  color: var(--gold-bright);
+}
+
+.modal-player-row.highlighted .modal-player-name strong {
+  color: var(--gold);
+}
+
+.modal-player-name span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  color: var(--text-dim);
+}
+
+.modal-player-kda {
+  grid-area: kda;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.modal-player-kda strong {
+  font-size: 14px;
+
+  color: var(--text);
+}
+
+.modal-player-kda span {
+  font-size: 10px;
+
+  color: var(--text-dim);
+}
+
+.modal-player-stats {
+  grid-area: stats;
+
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+
+  margin: 0;
+}
+
+.modal-player-stats > div {
+  min-width: 0;
+}
+
+.modal-player-stats dt {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--text-dim);
+}
+
+.modal-player-stats dd {
+  margin: 0;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: var(--text-blue);
+}
+
+
+/* ÍTEMS: 6 + accesorio */
+
+.modal-items {
+  grid-area: items;
+
+  display: grid;
+  grid-template-columns: repeat(7, 24px);
+  gap: 3px;
+
+  justify-content: end;
+}
+
+.modal-item-slot {
+  width: 24px;
+  height: 24px;
+
+  background: rgba(var(--void-rgb), 0.6);
+  border: 1px solid rgba(var(--gold-rgb), 0.12);
+  border-radius: 4px;
+
+  overflow: hidden;
+}
+
+.modal-item-slot.accesorio {
+  border-radius: 50%;
+}
+
+.modal-item-slot img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ------------------------------------------------------------
+   e) RESUMEN
+------------------------------------------------------------ */
+
+.match-modal-resumen {
+  padding: 16px 20px;
+
+  background: rgba(var(--hextech-rgb), 0.05);
+  border: 1px solid rgba(var(--hextech-rgb), 0.2);
+  border-left: 3px solid var(--hextech);
+  border-radius: 7px;
+}
+
+.match-modal-body .match-modal-resumen h3 {
+  margin-bottom: 8px;
+
+  color: var(--hextech);
+}
+
+.match-modal-resumen p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: var(--text);
+}
+
+
+/* ------------------------------------------------------------
+   CARGA Y ERROR
+------------------------------------------------------------ */
+
+.match-modal-empty {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+.match-modal-empty strong {
+  font-family: "Cinzel", serif;
+
+  color: var(--gold-bright);
+}
+
+.match-modal-empty p {
+  max-width: 450px;
+  margin: 0;
+
+  color: var(--text-dim);
+}
+
+.match-modal-spinner {
+  width: 34px;
+  height: 34px;
+
+  border: 3px solid rgba(var(--gold-rgb), 0.2);
+  border-top-color: var(--hextech);
+  border-radius: 50%;
+
+  animation: matchModalGiro 0.8s linear infinite;
+}
+
+.match-modal-retry {
+  margin-top: 6px;
+  padding: 9px 18px;
+
+  border: 1px solid rgba(var(--gold-rgb), 0.45);
+  border-radius: 4px;
+
+  background: rgba(var(--gold-rgb), 0.08);
+  color: var(--gold-bright);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.match-modal-retry:hover {
+  background: rgba(var(--gold-rgb), 0.16);
+  border-color: var(--gold);
+}
+
+
+/* ------------------------------------------------------------
+   ANIMACIONES
+------------------------------------------------------------ */
+
+@keyframes matchModalBackdropIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes matchModalIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+@keyframes matchModalGiro {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .match-modal-backdrop,
+  .match-modal,
+  .match-modal-backdrop.cerrando,
+  .match-modal.cerrando {
+    animation: none;
+  }
+
+  .match-modal-spinner {
+    animation-duration: 2.4s;
+  }
+
+  .modal-player-row,
+  .match-modal-close,
+  .match-modal-retry {
+    transition: none;
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+
+/* Menos de 900 px: los equipos van uno debajo del otro */
+@media (max-width: 899px) {
+
+  .match-modal-teams {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+}
+
+@media (max-width: 760px) {
+
+  .match-modal-backdrop {
+    padding: 10px;
+  }
+
+  .match-modal {
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+
+  .match-modal-header {
+    padding: 16px 18px;
+  }
+
+  .match-modal-body {
+    gap: 16px;
+
+    padding: 16px 14px 20px;
+  }
+
+  .match-modal-marcador,
+  .match-modal-duelo,
+  .match-modal-resumen {
+    padding: 14px;
+  }
+
+  .match-modal-score {
+    gap: 14px;
+  }
+
+  .match-modal-score strong {
+    font-size: 26px;
+  }
+
+  .duelo-icono {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .duelo-filas > div,
+  .match-modal-objetivos > div {
+    grid-template-columns: 1fr minmax(76px, auto) 1fr;
+    gap: 8px;
+
+    padding: 6px;
+  }
+
+  .duelo-filas .propio,
+  .duelo-filas .rival {
+    font-size: 12px;
+  }
+
+}
+
+/* Celular: stats e ítems en su propia línea */
+@media (max-width: 560px) {
+
+  .modal-player-row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "icono nombre kda"
+      "stats stats  stats"
+      "items items  items";
+
+    padding: 10px;
+  }
+
+  .modal-champion-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-items {
+    justify-content: start;
+  }
+
+  .duelo-campeones {
+    gap: 8px;
+  }
+
+  .duelo-campeon {
+    gap: 8px;
+  }
+
+  .duelo-vs {
+    font-size: 11px;
+  }
+
+}

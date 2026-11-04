@@ -1,0 +1,207 @@
+/* SECTION GENERAL */
+
+.section,
+.recent-section {
+  padding: 72px 64px;
+
+  border-bottom: 1px solid var(--line);
+
+  background: var(--void);
+}
+
+.section-head {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 44px;
+
+  padding: 0;
+
+  border: none;
+}
+
+.section-head > div {
+  min-width: 0;
+}
+
+.section-head h2 {
+  color: var(--gold-bright);
+
+  font-family: "Cinzel", serif;
+
+  font-size: 30px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  font-variant: small-caps;
+}
+
+.section-head p {
+  max-width: 500px;
+
+  color: var(--text-blue);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  text-align: left;
+}
+
+.section-eyebrow {
+  display: none;
+}
+
+/* MATCH STRIP */
+
+.match-strip {
+  display: flex;
+  gap: 16px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding-bottom: 10px;
+
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(var(--gold-rgb), 0.72)
+    rgba(var(--panel-rgb), 0.92);
+}
+
+.match-strip::-webkit-scrollbar {
+  height: 8px;
+}
+
+.match-strip::-webkit-scrollbar-track {
+  background: rgba(var(--panel-rgb), 0.92);
+  border: 1px solid rgba(var(--gold-rgb), 0.08);
+  border-radius: 999px;
+}
+
+.match-strip::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-dim-rgb), 0.9),
+    rgba(var(--gold-rgb), 0.95)
+  );
+
+  border: 2px solid rgba(var(--panel-rgb), 0.92);
+  border-radius: 999px;
+}
+
+.match-strip::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    var(--gold),
+    rgba(var(--gold-bright-rgb), 0.95)
+  );
+}
+
+.match-strip::-webkit-scrollbar-button {
+  display: none;
+}
+
+.match-card {
+  min-width: 182px;
+
+  min-height: 200px;
+
+  flex-shrink: 0;
+
+  padding: 18px;
+
+  background: var(--panel);
+
+  border: none;
+
+  border-left: 3px solid var(--victory);
+
+  border-radius: 2px;
+}
+
+.match-card.loss {
+  border-left-color: var(--defeat);
+}
+
+.champ-icon {
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 17px;
+
+  object-fit: cover;
+
+  border-radius: 4px;
+
+  border: 1px solid var(--line);
+
+  background: var(--panel-raised);
+}
+
+.match-kda {
+  color: var(--gold-bright);
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.match-meta {
+  margin-top: 14px;
+
+  color: var(--text-blue);
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+.match-result {
+  margin-top: 17px;
+
+  font-size: 11.5px;
+
+  font-weight: 700;
+}
+
+.match-card.win .match-result {
+  color: var(--victory);
+}
+
+.match-card.loss .match-result {
+  color: var(--defeat);
+}
+
+/* Remake / no válida: atenuada y sin interacción */
+.match-card.remake {
+  opacity: 0.45;
+
+  filter: grayscale(0.7);
+
+  cursor: default;
+
+  border-left-color: var(--text-dim);
+}
+
+.match-card.remake:hover {
+  transform: none;
+
+  border-left-color: var(--text-dim);
+
+  box-shadow: none;
+}
+
+.match-card.remake .match-result {
+  color: var(--text-dim);
+}

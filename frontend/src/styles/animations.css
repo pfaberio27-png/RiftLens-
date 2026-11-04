@@ -1,0 +1,245 @@
+/* ============================================================
+   ANIMACIONES Y DINAMISMO
+============================================================ */
+
+
+/* ------------------------------------------------------------
+   SECCIONES QUE APARECEN AL HACER SCROLL
+   (clases agregadas por useRevelarAlScroll)
+------------------------------------------------------------ */
+
+.revelar {
+  opacity: 0;
+
+  transform: translateY(18px);
+
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+
+/* transform: none para no alterar los modales con position: fixed */
+.revelar.revelado {
+  opacity: 1;
+
+  transform: none;
+}
+
+
+/* ------------------------------------------------------------
+   HOVER CON BRILLO CIAN EN TARJETAS
+------------------------------------------------------------ */
+
+.match-card,
+.kmeans-cluster-card,
+.recomendacion-card,
+.performance-chart-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.match-card:hover,
+.kmeans-cluster-card:hover,
+.recomendacion-card:hover,
+.performance-chart-card:hover {
+  border-color: rgba(var(--hextech-rgb), 0.35);
+
+  box-shadow:
+    0 0 0 1px rgba(var(--hextech-rgb), 0.12),
+    0 0 18px rgba(var(--hextech-rgb), 0.14);
+}
+
+
+/* ------------------------------------------------------------
+   HOVER CON BRILLO CIAN EN BOTONES
+------------------------------------------------------------ */
+
+.header-search button,
+.hero-search button,
+.pagination-button,
+.performance-chart-tabs button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.header-search button:hover:not(:disabled),
+.hero-search button:hover:not(:disabled),
+.pagination-button:hover:not(:disabled),
+.performance-chart-tabs button:hover {
+  box-shadow:
+    0 0 14px rgba(var(--hextech-rgb), 0.28);
+}
+
+.header-search button:focus-visible,
+.hero-search button:focus-visible,
+.pagination-button:focus-visible {
+  outline: 2px solid var(--hextech);
+  outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   SKELETON DE CARGA
+------------------------------------------------------------ */
+
+.skeleton-resultados {
+  width: min(880px, 92%);
+
+  margin-top: 36px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.skeleton-fila {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+.skeleton {
+  border-radius: 4px;
+
+  border: 1px solid rgba(var(--gold-rgb), 0.1);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(var(--panel-rgb), 0.9) 0%,
+      rgba(var(--hextech-rgb), 0.08) 50%,
+      rgba(var(--panel-rgb), 0.9) 100%
+    );
+
+  background-size: 200% 100%;
+
+  animation: skeletonBrillo 1.4s ease-in-out infinite;
+}
+
+.skeleton-hero {
+  height: 120px;
+}
+
+.skeleton-tarjeta {
+  height: 84px;
+}
+
+.skeleton-bloque {
+  height: 160px;
+}
+
+@keyframes skeletonBrillo {
+
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   CIERRE DE MODALES (clase .cerrando de useCierreAnimado)
+   Duración = DURACION_CIERRE_MS (180 ms)
+------------------------------------------------------------ */
+
+.match-modal-backdrop.cerrando {
+  animation: modalFondoSalida 0.18s ease forwards;
+}
+
+.match-modal.cerrando {
+  animation: modalSalida 0.18s ease forwards;
+}
+
+@keyframes modalFondoSalida {
+
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+
+}
+
+@keyframes modalSalida {
+
+  from {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  to {
+    opacity: 0;
+
+    transform:
+      translateY(10px)
+      scale(0.985);
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   ENCABEZADO NO FIJO EN PANTALLAS PEQUEÑAS
+------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+  .header {
+    position: static;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .skeleton-fila {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOVIMIENTO REDUCIDO
+------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+  .revelar {
+    opacity: 1;
+
+    transform: none;
+  }
+
+}

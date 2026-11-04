@@ -1,0 +1,21 @@
+# Variables de entorno
+.env
+backend/.env
+frontend/.env
+
+# Entornos virtuales de Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Caché local de partidas de Riot
+backend/app/data/partidas.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

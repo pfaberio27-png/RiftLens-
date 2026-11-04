@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "descripcion": "Catálogo de recomendaciones de RiftLens. El sistema elige las más adecuadas para cada jugador según las métricas en las que está por debajo de la referencia profesional de su rol.",
+  "niveles": {
+    "leve": "entre 5 % y 15 % por debajo de la referencia",
+    "moderada": "entre 15 % y 30 % por debajo de la referencia",
+    "alta": "más de 30 % por debajo de la referencia",
+    "cualquiera": "cualquier brecha mayor o igual a 5 %"
+  },
+  "recomendaciones": [
+    {
+      "id": "KDA-01",
+      "metrica": "kda",
+      "roles": ["TODOS"],
+      "nivel": "leve",
+      "titulo": "Elige mejor tus peleas",
+      "texto": "Antes de entrar a un intercambio, revisa cuántos rivales no aparecen en el minimapa. Si faltan dos o más, juega más atrás hasta que vuelvan a verse."
+    },
+    {
+      "id": "KDA-02",
+      "metrica": "kda",
+      "roles": ["TODOS"],
+      "nivel": "moderada",
+      "titulo": "Reduce las muertes evitables",
+      "texto": "Revisa la repetición de tus 3 últimas derrotas y anota en qué minuto y por qué moriste. Casi siempre se repite el mismo error (avanzar sin visión, quedarte con poca vida o perseguir demasiado)."
+    },
+    {
+      "id": "KDA-03",
+      "metrica": "kda",
+      "roles": ["TODOS"],
+      "nivel": "alta",
+      "titulo": "Prioriza sobrevivir",
+      "texto": "Durante tus próximas partidas tu objetivo principal será morir menos que tu promedio actual, aunque consigas menos asesinatos. Si una pelea está perdida, retírate en lugar de intentar salvarla."
+    },
+    {
+      "id": "KDA-04",
+      "metrica": "kda",
+      "roles": ["TODOS"],
+      "nivel": "cualquiera",
+      "condicion": { "dato": "muertes_promedio", "operador": ">=", "valor": 6 },
+      "titulo": "Demasiadas muertes por partida",
+      "texto": "Mueres 6 o más veces por partida en promedio. Cada muerte entrega oro y tiempo al rival: vuelve a la base cuando tengas menos de un tercio de vida en lugar de quedarte en línea."
+    },
+    {
+      "id": "KDA-05",
+      "metrica": "kda",
+      "roles": ["JUNGLE"],
+      "nivel": "cualquiera",
+      "titulo": "Emboscadas con mejor información",
+      "texto": "Antes de intentar una emboscada, confirma dónde está el jungla rival. Entrar a una línea mientras él está cerca suele terminar en un dos contra dos que no controlas."
+    },
+    {
+      "id": "KDA-06",
+      "metrica": "kda",
+      "roles": ["SUPPORT"],
+      "nivel": "cualquiera",
+      "titulo": "Posicionamiento del soporte",
+      "texto": "No camines delante de tu tirador sin visión. Usa los arbustos de tu lado del río y deja que el rival se acerque a tu zona antes de iniciar."
+    },
+    {
+      "id": "KDA-07",
+      "metrica": "kda",
+      "roles": ["ADC"],
+      "nivel": "cualquiera",
+      "titulo": "Distancia segura en las peleas",
+      "texto": "En las peleas, ataca al objetivo más cercano que puedas golpear sin entrar en el alcance de los iniciadores rivales. Un tirador vivo hace más daño que uno que entró primero."
+    },
+    {
+      "id": "KDA-08",
+      "metrica": "kda",
+      "roles": ["TOP"],
+      "nivel": "cualquiera",
+      "titulo": "Cuidado con las líneas largas",
+      "texto": "En la línea superior las emboscadas son frecuentes. Si empujas la oleada hasta la torre rival sin visión en el río, coloca un ward o retrocede apenas termines de empujar."
+    },
+    {
+      "id": "CS-01",
+      "metrica": "cs_por_minuto",
+      "roles": ["TOP", "MID", "ADC"],
+      "nivel": "leve",
+      "titulo": "Último golpe bajo presión",
+      "texto": "Concéntrate en no perder súbditos de cañón: valen más oro que los demás. Si el rival te presiona, prioriza esos súbditos y cede los de cuerpo a cuerpo."
+    },
+    {
+      "id": "CS-02",
+      "metrica": "cs_por_minuto",
+      "roles": ["TOP", "MID", "ADC"],
+      "nivel": "moderada",
+      "titulo": "Practica el último golpe",
+      "texto": "Dedica 10 minutos antes de jugar a practicar el último golpe en el modo práctica con tu campeón principal, sin objetos. Cuenta cuántos súbditos consigues a los 10 minutos e intenta superarlo cada día."
+    },
+    {
+      "id": "CS-03",
+      "metrica": "cs_por_minuto",
+      "roles": ["TOP", "MID", "ADC"],
+      "nivel": "alta",
+      "titulo": "No abandones las oleadas",
+      "texto": "Tu farmeo está muy por debajo de la referencia. Después de cada visita a la base o pelea, regresa a la oleada más cercana antes de buscar otra acción: una oleada perdida es oro que no se recupera."
+    },
+    {
+      "id": "CS-04",
+      "metrica": "cs_por_minuto",
+      "roles": ["TOP", "MID", "ADC"],
+      "nivel": "cualquiera",
+      "titulo": "Farmeo en el juego medio",
+      "texto": "Tras caer la primera torre, recoge las oleadas laterales que se acercan a tu lado del mapa cuando no haya un objetivo en los próximos 40 segundos."
+    },
+    {
+      "id": "CS-05",
+      "metrica": "cs_por_minuto",
+      "roles": ["MID"],
+      "nivel": "cualquiera",
+      "titulo": "Empuja antes de moverte",
+      "texto": "Antes de ir a ayudar a otra línea, empuja tu oleada hacia la torre rival. Así no pierdes súbditos mientras te mueves y el rival no puede seguirte sin perderlos él."
+    },
+    {
+      "id": "CS-06",
+      "metrica": "cs_por_minuto",
+      "roles": ["JUNGLE"],
+      "nivel": "cualquiera",
+      "titulo": "Ruta de campamentos completa",
+      "texto": "Entre emboscadas, no dejes campamentos disponibles sin limpiar. Planifica una ruta que pase por tus campamentos cada vez que reaparezcan."
+    },
+    {
+      "id": "CS-07",
+      "metrica": "cs_por_minuto",
+      "roles": ["JUNGLE"],
+      "nivel": "moderada",
+      "titulo": "Menos tiempo sin hacer nada",
+      "texto": "Si una emboscada no es posible, vuelve a tu jungla en lugar de esperar en un arbusto. El tiempo esperando sin resultado es oro y experiencia que pierdes."
+    },
+    {
+      "id": "ORO-01",
+      "metrica": "oro_por_minuto",
+      "roles": ["TODOS"],
+      "nivel": "leve",
+      "titulo": "Convierte ventajas en oro",
+      "texto": "Después de ganar un intercambio o eliminar a tu rival, usa ese tiempo para golpear la torre o tomar las placas en vez de volver de inmediato."
+    },
+    {
+      "id": "ORO-02",
+      "metrica": "oro_por_minuto",
+      "roles": ["TOP", "MID", "ADC"],
+      "nivel": "cualquiera",
+      "titulo": "Placas de torre",
+      "texto": "Antes del minuto 14 las torres de línea entregan oro extra por placa. Si tu rival vuelve a la base o muere, golpea la torre antes de que desaparezcan."
+    },
+    {
+      "id": "ORO-03",
+      "metrica": "oro_por_minuto",
+      "roles": ["TODOS"],
+      "nivel": "moderada",
+      "titulo": "Gasta tu oro a tiempo",
+      "texto": "Vuelve a la base cuando puedas completar un componente importante. Pasar mucho tiempo con oro sin gastar te deja en desventaja de objetos frente a tu rival."
+    },
+    {
+      "id": "ORO-04",
+      "metrica": "oro_por_minuto",
+      "roles": ["SUPPORT"],
+      "nivel": "cualquiera",
+      "titulo": "Completa tu objeto de soporte",
+      "texto": "Usa las cargas de tu objeto de soporte con regularidad para completarlo pronto: es tu principal fuente de oro y te permite comprar wards."
+    },
+    {
+      "id": "ORO-05",
+      "metrica": "oro_por_minuto",
+      "roles": ["TODOS"],
+      "nivel": "alta",
+      "titulo": "Muertes que cuestan oro",
+      "texto": "Tu oro por minuto está muy por debajo de la referencia. Además de farmear, evita morir con mucho oro acumulado: si llevas suficiente para un objeto, vuelve a comprarlo antes de arriesgarte."
+    },
+    {
+      "id": "DMG-01",
+      "metrica": "daño_por_minuto",
+      "roles": ["TODOS"],
+      "nivel": "leve",
+      "titulo": "Más presencia en los intercambios",
+      "texto": "Busca intercambios cortos cuando el rival use una habilidad importante o se acerque a golpear un súbdito: es cuando no puede responderte."
+    },
+    {
+      "id": "DMG-02",
+      "metrica": "daño_por_minuto",
+      "roles": ["TODOS"],
+      "nivel": "moderada",
+      "titulo": "Llega antes a las peleas por objetivos",
+      "texto": "Revisa los tiempos de dragón y Barón y llega 30 segundos antes con tus habilidades disponibles. Llegar tarde a una pelea es la forma más común de hacer poco daño."
+    },
+    {
+      "id": "DMG-03",
+      "metrica": "daño_por_minuto",
+      "roles": ["ADC", "MID"],
+      "nivel": "cualquiera",
+      "titulo": "Golpea durante toda la pelea",
+      "texto": "Como fuente principal de daño, mantente cerca de tu equipo y golpea de forma continua desde una posición segura en lugar de esperar al final de la pelea."
+    },
+    {
+      "id": "DMG-04",
+      "metrica": "daño_por_minuto",
+      "roles": ["ADC", "MID"],
+      "nivel": "alta",
+      "titulo": "Revisa tu elección de objetos",
+      "texto": "Tu daño está muy por debajo de la referencia. Compara tus objetos con las compras recomendadas para tu campeón y prioriza los objetos de daño antes que los defensivos."
+    },
+    {
+      "id": "DMG-05",
+      "metrica": "daño_por_minuto",
+      "roles": ["TOP", "JUNGLE"],
+      "nivel": "cualquiera",
+      "titulo": "Participa en las peleas de equipo",
+      "texto": "Cuando tu equipo se agrupe para un objetivo, únete a tiempo. Teletransporte o una buena ruta de jungla te permiten estar en la pelea en lugar de llegar cuando terminó."
+    },
+    {
+      "id": "DMG-06",
+      "metrica": "daño_por_minuto",
+      "roles": ["SUPPORT"],
+      "nivel": "cualquiera",
+      "titulo": "Aporta en la línea",
+      "texto": "En la fase de línea, castiga al tirador rival cuando se acerque a golpear súbditos. Unos pocos golpes oportunos aumentan tu daño y la presión de tu tirador."
+    },
+    {
+      "id": "VIS-01",
+      "metrica": "vision_score",
+      "roles": ["TODOS"],
+      "nivel": "leve",
+      "titulo": "Usa tu trinket siempre",
+      "texto": "Coloca tu ward de trinket cada vez que esté disponible, sobre todo en el río o en la entrada a tu línea. Un trinket sin usar no da información a nadie."
+    },
+    {
+      "id": "VIS-02",
+      "metrica": "vision_score",
+      "roles": ["TODOS"],
+      "nivel": "moderada",
+      "titulo": "Compra un ward de control por visita",
+      "texto": "En cada visita a la base compra al menos un ward de control y colócalo en una zona que uses a menudo, como el arbusto del río más cercano a tu línea."
+    },
+    {
+      "id": "VIS-03",
+      "metrica": "vision_score",
+      "roles": ["TODOS"],
+      "nivel": "alta",
+      "titulo": "La visión también es tu responsabilidad",
+      "texto": "Tu puntuación de visión está muy por debajo de la referencia. Proponte colocar un ward cada vez que vuelvas a tu línea y destruir los wards rivales que veas con tu ward de control."
+    },
+    {
+      "id": "VIS-04",
+      "metrica": "vision_score",
+      "roles": ["TODOS"],
+      "nivel": "cualquiera",
+      "condicion": { "dato": "control_wards_promedio", "operador": "<", "valor": 1 },
+      "titulo": "Casi no compras wards de control",
+      "texto": "En promedio compras menos de un ward de control por partida. Es uno de los objetos más baratos y útiles del juego: inclúyelo en todas tus compras."
+    },
+    {
+      "id": "VIS-05",
+      "metrica": "vision_score",
+      "roles": ["SUPPORT"],
+      "nivel": "cualquiera",
+      "titulo": "Prepara la visión de los objetivos",
+      "texto": "Como soporte, coloca visión alrededor del dragón o del Barón un minuto antes de que aparezcan. Usa el trinket de barrido (lente) para eliminar los wards rivales de esa zona."
+    },
+    {
+      "id": "VIS-06",
+      "metrica": "vision_score",
+      "roles": ["JUNGLE"],
+      "nivel": "cualquiera",
+      "titulo": "Visión en la jungla rival",
+      "texto": "Coloca wards en las entradas a la jungla rival para saber por dónde se mueve su jungla. Esa información te protege y te muestra qué línea puede necesitar ayuda."
+    },
+    {
+      "id": "VIS-07",
+      "metrica": "vision_score",
+      "roles": ["ADC", "MID", "TOP"],
+      "nivel": "cualquiera",
+      "titulo": "Ilumina tu camino",
+      "texto": "Antes de avanzar a una zona oscura del mapa, coloca un ward o espera a que un compañero lo haga. Avanzar sin visión es la forma más común de caer en emboscadas."
+    },
+    {
+      "id": "WR-01",
+      "metrica": "win_rate",
+      "roles": ["TODOS"],
+      "nivel": "cualquiera",
+      "titulo": "Juega los objetivos tras ganar peleas",
+      "texto": "Después de ganar una pelea, convierte la ventaja en un objetivo (torre, dragón o Barón) en lugar de seguir persiguiendo a los rivales."
+    },
+    {
+      "id": "WR-02",
+      "metrica": "win_rate",
+      "roles": ["TODOS"],
+      "nivel": "cualquiera",
+      "condicion": { "dato": "campeones_distintos_rol", "operador": ">=", "valor": 6 },
+      "titulo": "Reduce tu lista de campeones",
+      "texto": "Usaste 6 o más campeones distintos en tu rol principal. Concéntrate en 2 o 3 para dominar sus enfrentamientos y tiempos de poder."
+    },
+    {
+      "id": "WR-03",
+      "metrica": "win_rate",
+      "roles": ["TODOS"],
+      "nivel": "moderada",
+      "titulo": "Descansa tras dos derrotas seguidas",
+      "texto": "Si pierdes dos partidas seguidas, haz una pausa antes de continuar. Jugar con frustración suele llevar a decisiones apresuradas."
+    },
+    {
+      "id": "WR-04",
+      "metrica": "win_rate",
+      "roles": ["TODOS"],
+      "nivel": "alta",
+      "titulo": "Juega tus mejores campeones",
+      "texto": "Tu win rate está muy por debajo de lo esperado. Revisa en RiftLens tus campeones con mejor win rate en tu rol principal y priorízalos en tus próximas partidas clasificatorias."
+    },
+    {
+      "id": "GEN-01",
+      "metrica": "general",
+      "roles": ["TODOS"],
+      "nivel": "sin_debilidades",
+      "titulo": "Mantén tu constancia",
+      "texto": "Tus métricas están a la par o por encima de la referencia de tu rol. Sigue jugando con tus campeones principales para mantener ese nivel."
+    },
+    {
+      "id": "GEN-02",
+      "metrica": "general",
+      "roles": ["TODOS"],
+      "nivel": "sin_debilidades",
+      "titulo": "Aprende de tus mejores partidas",
+      "texto": "Revisa tus partidas con mejor rendimiento y observa qué hiciste distinto en los primeros 15 minutos. Repite esos hábitos de forma consciente."
+    },
+    {
+      "id": "GEN-03",
+      "metrica": "general",
+      "roles": ["TODOS"],
+      "nivel": "sin_debilidades",
+      "titulo": "Amplía tu impacto en el mapa",
+      "texto": "Con tu rendimiento individual estable, el siguiente paso es ayudar a otras líneas: muévete hacia los objetivos cuando tu línea esté empujada."
+    }
+  ]
+}

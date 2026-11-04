@@ -1,0 +1,12 @@
+@import "./styles/base.css";
+@import "./styles/header-controls.css";
+@import "./styles/layout-hero.css";
+@import "./styles/sections-matches.css";
+@import "./styles/performance-roles.css";
+@import "./styles/comparison-matchups-responsive.css";
+@import "./styles/toast-match-click.css";
+@import "./styles/match-modal.css";
+@import "./styles/kmeans.css";
+@import "./styles/roles-campeones.css";
+@import "./styles/performance-charts.css";
+@import "./styles/animations.css";
